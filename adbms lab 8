@@ -1,0 +1,164 @@
+create table Sailors1(sid integer primary key,sname varchar(50),rating integer,age real);
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> INSERT INTO Sailors1(sid, sname, rating, age) VALUES (22, 'Dustin', 7, 45.0), (29, 'Brutus', 1, 33.0), (31, 'Lubber', 8, 55.5), (32, 'Andy', 8, 25.5), (58, 'Rusty', 10, 35.0), (64, 'Horatio', 7, 35.0), (71,
+ 'Zorba', 10, 16.0), (74, 'Horatio', 9, 35.0), (85, 'Art', 3, 25.5), (95, 'Bob', 3, 63.5);
+Query OK, 10 rows affected (0.02 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> create table boats1(bid integer primary key,bname varchar(50),color varchar(50));
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> INSERT INTO boats1(bid, bname, color) VALUES (101, 'Interlake',
+'blue'),(102, 'Interlake', 'red'), (103, 'Clipper', 'green'), (104, 'Marine', 'red');
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+ create table reserves1(sid integer,bid integer,day date,foreign
+key (sid)references Sailors1(sid),foreign key (bid) references boats1(bid));
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> INSERT INTO reserves1(sid, bid, day) VALUES (22, 101, '1998-10-10'),(22,102, '1998-10-10'),(22, 103, '1998-10-08'),(22, 104, '1998-10-07'),(31, 102, '1998-11-10'),(31, 103, '1998-11-06'),(31, 104, '1998-11-12'),(64, 101, '1998-09-05'),(64, 102, '1998-09-08'),(74, 103, '1998-09-08');
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from Sailors1;
++-----+---------+--------+------+
+| sid | sname   | rating | age  |
++-----+---------+--------+------+
+|  22 | Dustin  |      7 |   45 |
+|  29 | Brutus  |      1 |   33 |
+|  31 | Lubber  |      8 | 55.5 |
+|  32 | Andy    |      8 | 25.5 |
+|  58 | Rusty   |     10 |   35 |
+|  64 | Horatio |      7 |   35 |
+|  71 | Zorba   |     10 |   16 |
+|  74 | Horatio |      9 |   35 |
+|  85 | Art     |      3 | 25.5 |
+|  95 | Bob     |      3 | 63.5 |
++-----+---------+--------+------+
+10 rows in set (0.01 sec)
+
+mysql> select * from boats1;
++-----+-----------+-------+
+| bid | bname     | color |
++-----+-----------+-------+
+| 101 | Interlake | blue  |
+| 102 | Interlake | red   |
+| 103 | Clipper   | green |
+| 104 | Marine    | red   |
++-----+-----------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from reserves1;
++------+------+------------+
+| sid  | bid  | day        |
++------+------+------------+
+|   22 |  101 | 1998-10-10 |
+|   22 |  102 | 1998-10-10 |
+|   22 |  103 | 1998-10-08 |
+|   22 |  104 | 1998-10-07 |
+|   31 |  102 | 1998-11-10 |
+|   31 |  103 | 1998-11-06 |
+|   31 |  104 | 1998-11-12 |
+|   64 |  101 | 1998-09-05 |
+|   64 |  102 | 1998-09-08 |
+|   74 |  103 | 1998-09-08 |
++------+------+------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(DISTINCT color) FROM boats1
+    -> ;
++-----------------------+
+| COUNT(DISTINCT color) |
++-----------------------+
+|                     3 |
++-----------------------+
+1 row in set (0.00 sec)
+
+SELECT Sailors1.* FROM Sailors1, reserves1 WHERE Sailors1.sid =
+reserves1.sid AND reserves1.bid = 101;
++-----+---------+--------+------+
+| sid | sname   | rating | age  |
++-----+---------+--------+------+
+|  22 | Dustin  |      7 |   45 |
+|  64 | Horatio |      7 |   35 |
++-----+---------+--------+------+
+2 rows in set (0.00 sec)
+
+select sname,age from Sailors1 where sid in (select sid from reserves1,boats1 where reserves1.bid=boats1.bid and color='red') order by
+age;
++---------+------+
+| sname   | age  |
++---------+------+
+| Horatio |   35 |
+| Dustin  |   45 |
+| Lubber  | 55.5 |
++---------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT sname FROM Sailors1 S, reserves1 R WHERE S.sid = R.sid;
++---------+
+| sname   |
++---------+
+| Dustin  |
+| Dustin  |
+| Dustin  |
+| Dustin  |
+| Lubber  |
+| Lubber  |
+| Lubber  |
+| Horatio |
+| Horatio |
+| Horatio |
++---------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT b.bname, s.sname FROM boats1 b INNER JOIN reserves1 r ON
+b.bid = r.bid INNER JOIN Sailors1 s ON s.sid=r.sid;
++-----------+---------+
+| bname     | sname   |
++-----------+---------+
+| Interlake | Dustin  |
+| Interlake | Horatio |
+| Interlake | Dustin  |
+| Interlake | Lubber  |
+| Interlake | Horatio |
+| Clipper   | Dustin  |
+| Clipper   | Lubber  |
+| Clipper   | Horatio |
+| Marine    | Dustin  |
+| Marine    | Lubber  |
++-----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT S.sid, S.sname FROM Sailors1 S, reserves1 R1, reserves1 R2 WHERE S.sid = R1.sid AND R1.day = R2.day AND R1.bid <> R2.bid;
++-----+---------+
+| sid | sname   |
++-----+---------+
+|  22 | Dustin  |
+|  64 | Horatio |
+|  74 | Horatio |
++-----+---------+
+3 rows in set (0.00 sec)
+mysql> SELECT R.sid FROM boats1 B, reserves1 R WHERE R.bid = B.bid AND
+B.color = 'red' UNION SELECT R2.sid FROM boats B2, reserves1 R2  WHERE
+R2.bid = B2.bid AND B2.color = 'green';
++------+
+| sid  |
++------+
+|   22 |
+|   31 |
+|   64 |
++------+
+3 rows in set (0.01 sec)
+
+SELECT S.sname FROM Sailors1 S WHERE NOT EXISTS (SELECT B.bid FROM boats1 B WHERE NOT EXISTS(SELECT R.bid FROM reserves1 R WHERE R.bid
+= B.bid AND R.sid = S.sid));
++--------+
+| sname  |
++--------+
+| Dustin |
++--------+
+1 row in set (0.00 sec)
+
