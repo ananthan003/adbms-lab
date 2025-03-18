@@ -1,0 +1,155 @@
+mysql> use ananthu;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> delimiter //
+mysql> create procedure `sum`(in a int,in b int)
+    -> begin
+    -> declare c int
+    -> ;
+    -> set c=a+b;
+    -> select concat('sum of two numbers=',c)as result;
+    -> end //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> delimiter ;
+mysql> call `sum`(5,10);
++-----------------------+
+| result                |
++-----------------------+
+| sum of two numbers=15 |
++-----------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delimiter //
+mysql> create procedure display()
+    -> begin
+    -> select * from employee;
+    -> end
+    -> //
+ERROR 1304 (42000): PROCEDURE display already exists
+mysql> delimiter //
+mysql> create procedure show()
+    -> begin
+    -> select * from employee;
+    -> end
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show()
+begin
+select * from employee;
+end' at line 1
+mysql> delimiter ;
+mysql> call display();
+ERROR 1146 (42S02): Table 'ananthu.student' doesn't exist
+mysql> delimiter ;a
+mysql> delimiter //
+mysql> create procedure display1()
+    -> begin
+    -> select * from employee;
+    -> end
+    -> //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> delimiter ;
+mysql> call display1();
++--------+----------+-----------+--------+
+| emp_id | emp_name | dept_name | salary |
++--------+----------+-----------+--------+
+|      1 | ananthu  | sales     |  25000 |
+|      2 | akshay   | sales     |  75000 |
+|      3 | ashus    | HR        |  28000 |
+|      4 | nandhu   | HR        |  35000 |
+|      5 | atul     | IT        |  96000 |
++--------+----------+-----------+--------+
+5 rows in set (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE CheckOddOrEven(IN input_number INT)
+    -> begin
+    -> IF MOD(input_number, 2) = 0 THEN
+    -> SELECT 'Even' AS result;
+    -> ELSE
+    -> SELECT 'Odd' AS result;
+    -> END IF;
+    -> end//
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> delimiter ;
+mysql> call checkOddOrEven(2);
++--------+
+| result |
++--------+
+| Even   |
++--------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> Delimiter //
+mysql> CREATE PROCEDURE Factorial( in a int)
+    -> begin
+    -> declare f int default 1;
+    -> while a > 0 do
+    -> set f = f * a;
+    -> set a = a - 1;
+    -> end while;
+    -> SELECT CONCAT('Factorial = ', f) AS Result;
+    -> end//
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> delimiter ;
+mysql> call Factorial(6);
++-----------------+
+| Result          |
++-----------------+
+| Factorial = 720 |
++-----------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delimiter //
+mysql> begin
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end' at line 2
+mysql> -- Change delimiter to //
+mysql> DELIMITER //
+mysql> 
+mysql> -- Create the procedure
+mysql> CREATE PROCEDURE find_max_of_three(IN val1 INT, IN val2 INT, IN val3 INT)
+    -> BEGIN
+    ->     DECLARE max_val INT;
+    ->     
+    ->     IF val1 >= val2 AND val1 >= val3 THEN
+    ->         SET max_val = val1;
+    ->     ELSEIF val2 >= val1 AND val2 >= val3 THEN
+    ->         SET max_val = val2;
+    ->     ELSE
+    ->         SET max_val = val3;
+    ->     END IF;
+    -> 
+    ->     SELECT max_val AS Maximum_Value;
+    -> END//
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> -- Reset the delimiter back to the default semicolon
+mysql> DELIMITER ;
+mysql> CALL find_max_of_three(10, 20, 30);
++---------------+
+| Maximum_Value |
++---------------+
+|            30 |
++---------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>   
+
+
