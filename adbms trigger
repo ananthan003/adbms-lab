@@ -1,0 +1,171 @@
+
+
+mysql> CREATE TABLE employees2 (
+    -> employee_id INT PRIMARY KEY,
+    -> first_name VARCHAR(50),
+    -> last_name VARCHAR(50),
+    -> salary DECIMAL(10, 2)
+    -> );
+    -> CREATE TABLE employees3(
+    -> employee_id INT PRIMARY KEY,
+    -> first_name VARCHAR(50),
+    -> last_name VARCHAR(50),
+    -> salary DECIMAL(10, 2)
+    -> );
+    -> //
+Query OK, 0 rows affected (0.10 sec)
+
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> CREATE TABLE audit_log (
+    -> log_id INT PRIMARY KEY AUTO_INCREMENT,
+    -> action VARCHAR(255),
+    -> timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    -> );
+    -> //
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> INSERT INTO employees2 (employee_id, first_name, last_name, salary)
+    -> VALUES
+    -> (1, 'John', 'Doe', 50000.00),
+    -> (2, 'Jane', 'Smith', 60000.00),
+    -> (3, 'Michael', 'Johnson', 55000.00);
+    -> //
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO audit_log (action, timestamp)
+    -> VALUES
+    -> ('New employees added', CURRENT_TIMESTAMP);
+    -> //
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from employees2;
+    -> //
++-------------+------------+-----------+----------+
+| employee_id | first_name | last_name | salary   |
++-------------+------------+-----------+----------+
+|           1 | John       | Doe       | 50000.00 |
+|           2 | Jane       | Smith     | 60000.00 |
+|           3 | Michael    | Johnson   | 55000.00 |
++-------------+------------+-----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> //
+ERROR: 
+No query specified
+
+mysql> select * from audit_log;;
+    -> //
++--------+---------------------+---------------------+
+| log_id | action              | timestamp           |
++--------+---------------------+---------------------+
+|      1 | New employees added | 2025-03-19 10:39:20 |
++--------+---------------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> DELIMITER //
+mysql> CREATE TRIGGER after_employee_insert
+    -> AFTER INSERT ON employees
+    -> FOR EACH ROW
+    -> BEGIN
+    -> INSERT INTO audit_log (action, timestamp)
+    -> VALUES ('New employee inserted', NOW());
+    -> END //
+Query OK, 0 rows affected (0.04 sec)
+
+
+mysql> INSERT INTO employees2 (employee_id, first_name, last_name, salary)
+    -> VALUES (4, 'Minnu', 'Joseph', 65000.00);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from employees;
++--------+-----------+---------+------------+----------+
+| emp_id | emp_name  | emp_age | city       | income   |
++--------+-----------+---------+------------+----------+
+|    101 | Peter     |      32 | Newyork    |  2000000 |
+|    102 | Mark      |      32 | California | 30000000 |
+|    103 | Donald    |      40 | Arizona    | 50000000 |
+|    104 | Obama     |      35 | Florida    | 50000000 |
+|    105 | Linklon   |      32 | Georgia    | 25000000 |
+|    106 | Kane      |      45 | Alaska     | 45000000 |
+|    107 | Adam      |      45 | California | 50000000 |
+|    108 | Macculam  |      40 | Florida    | 35000000 |
+|    109 | Brayan    |      40 | Alaska     | 40000000 |
+|    110 | Stephen   |      40 | Arizona    | 60000000 |
+|    111 | Alexander |      45 | California |  7000000 |
++--------+-----------+---------+------------+----------+
+11 rows in set (0.00 sec)
+
+mysql> select * from employees2;
++-------------+------------+-----------+----------+
+| employee_id | first_name | last_name | salary   |
++-------------+------------+-----------+----------+
+|           1 | John       | Doe       | 50000.00 |
+|           2 | Jane       | Smith     | 60000.00 |
+|           3 | Michael    | Johnson   | 55000.00 |
+|           4 | Minnu      | Joseph    | 65000.00 |
++-------------+------------+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from audit_log;
++--------+---------------------+---------------------+
+| log_id | action              | timestamp           |
++--------+---------------------+---------------------+
+|      1 | New employees added | 2025-03-19 10:39:20 |
++--------+---------------------+---------------------+
+1 row in set (0.01 sec)
+
+   
+Query OK, 0 rows affected (0.10 sec)
+
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> CREATE TABLE audit_log (
+    -> log_id INT PRIMARY KEY AUTO_INCREMENT,
+    -> action VARCHAR(255),
+    -> timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    -> );
+    -> //
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> INSERT INTO employees2 (employee_id, first_name, last_name, salary)
+    -> VALUES
+    -> (1, 'John', 'Doe', 50000.00),
+    -> (2, 'Jane', 'Smith', 60000.00),
+    -> (3, 'Michael', 'Johnson', 55000.00);
+    -> //
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO audit_log (action, timestamp)
+    -> VALUES
+    -> ('New employees added', CURRENT_TIMESTAMP);
+    -> //
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from employees2;
+    -> //
++-------------+------------+-----------+----------+
+| employee_id | first_name | last_name | salary   |
++-------------+------------+-----------+----------+
+|           1 | John       | Doe       | 50000.00 |
+|           2 | Jane       | Smith     | 60000.00 |
+|           3 | Michael    | Johnson   | 55000.00 |
++-------------+------------+-----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> //
+ERROR: 
+No query specified
+
+mysql> select * from audit_log;;
+    -> //
++--------+---------------------+---------------------+
+| log_id | action              | timestamp           |
++--------+---------------------+---------------------+
+|      1 | New employees added | 2025-03-19 10:39:20 |
++--------+---------------------+---------------------+
+1 row in set (0.00 sec)
+
+
