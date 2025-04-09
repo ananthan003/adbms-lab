@@ -1,0 +1,81 @@
+use Employee
+switched to db Employee
+
+> db.createCollection("EMPL")
+{ "ok" : 1 }
+
+> db.EMPL.insertMany([
+... { "Empno": 1, "Name": "John Doe", "Salary": 60000, "Role": "Manager" },
+... { "Empno": 2, "Name": "Alice Smith", "Salary": 50000, "Role": "Developer" },
+... ])
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("67f6095faead4114108cecf7"),
+		ObjectId("67f6095faead4114108cecf8")
+	]
+}
+> db.EMPL.find().pretty()
+{
+	"_id" : ObjectId("67f6095faead4114108cecf7"),
+	"Empno" : 1,
+	"Name" : "John Doe",
+	"Salary" : 60000,
+	"Role" : "Manager"
+}
+{
+	"_id" : ObjectId("67f6095faead4114108cecf8"),
+	"Empno" : 2,
+	"Name" : "Alice Smith",
+	"Salary" : 50000,
+	"Role" : "Developer"
+}
+
+> db.createUser({
+... user: "admin",
+... pwd: "admin123",
+... roles: ["readWrite", "dbAdmin"]
+... });
+
+Successfully added user: { "user" : "admin", "roles" : [ "readWrite", "dbAdmin" ] }
+
+> db.createUser({
+... user: "developer",
+... pwd: "dev123",
+... roles: ["readWrite"]
+... });
+
+Successfully added user: { "user" : "developer", "roles" : [ "readWrite" ] }
+
+> show users
+{
+	"_id" : "Employee.admin",
+	"userId" : UUID("49e3b5b7-66fd-4348-a756-77b859cc7c1b"),
+	"user" : "admin",
+	"db" : "Employee",
+	"roles" : [
+		{
+			"role" : "readWrite",
+			"db" : "Employee"
+		},
+		{
+			"role" : "dbAdmin",
+			"db" : "Employee"
+		}
+	]
+}
+{
+	"_id" : "Employee.developer",
+	"userId" : UUID("1ebd6eb0-fe87-47c9-9417-9e8a209a2067"),
+	"user" : "developer",
+	"db" : "Employee",
+	"roles" : [
+		{
+			"role" : "readWrite",
+			"db" : "Employee"
+		}
+	]
+}
+> 
+
+
