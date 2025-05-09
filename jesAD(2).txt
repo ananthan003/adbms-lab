@@ -1,0 +1,1877 @@
+1)
+
+mysql> create database jeswin;
+Query OK, 1 row affected (0.02 sec)
+mysql> use jeswin;
+Database changed
+mysql> CREATE TABLE student(RollNo INT PRIMARY KEY,Name VARCHAR(255),Age INT,Course VARCHAR(50),Year INT);
+Query OK, 0 rows affected (0.08 sec)
+mysql> desc student;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| RollNo | int          | NO   | PRI | NULL    |       |
+| Name   | varchar(255) | YES  |     | NULL    |       |
+| Age    | int          | YES  |     | NULL    |       |
+| Course | varchar(50)  | YES  |     | NULL    |       |
+| Year   | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+mysql> INSERT INTO student(Rollno,Name,Age,Course,Year)VALUES(1,'jeswin',21,'MCA',2024);
+Query OK, 1 row affected (0.02 sec)
+mysql> INSERT INTO student(Rollno,Name,Age,Course,Year)VALUES(2,'joel',21,'MBA',2025);
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO student(Rollno,Name,Age,Course,Year)VALUES(3,'Amrutha',20,'MBA',2025);
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO student(Rollno,Name,Age,Course,Year)VALUES(4,'Ashli',20,'MBA',2025);
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO student(Rollno,Name,Age,Course,Year)VALUES(5,'Allen',20,'MCA',2024);
+Query OK, 1 row affected (0.02 sec)
+mysql> desc student;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| RollNo | int          | NO   | PRI | NULL    |       |
+| Name   | varchar(255) | YES  |     | NULL    |       |
+| Age    | int          | YES  |     | NULL    |       |
+| Course | varchar(50)  | YES  |     | NULL    |       |
+| Year   | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+mysql> SELECT * FROM student;
++--------+---------+------+--------+------+
+| RollNo | Name    | Age  | Course | Year |
++--------+---------+------+--------+------+
+|      1 | jeswin  |   21 | MCA    | 2024 |
+|      2 | joel    |   21 | MBA    | 2025 |
+|      3 | Amrutha |   20 | MBA    | 2025 |
+|      4 | Ashli   |   20 | MBA    | 2025 |
+|      5 | Allen   |   20 | MCA    | 2024 |
++--------+---------+------+--------+------+
+5 rows in set (0.00 sec)
+mysql> ALTER TABLE student ADD Marks INT;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> desc student;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| RollNo | int          | NO   | PRI | NULL    |       |
+| Name   | varchar(255) | YES  |     | NULL    |       |
+| Age    | int          | YES  |     | NULL    |       |
+| Course | varchar(50)  | YES  |     | NULL    |       |
+| Year   | int          | YES  |     | NULL    |       |
+| Marks  | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+mysql> TRUNCATE TABLE student;
+Query OK, 0 rows affected (0.14 sec)
+mysql> SELECT * FROM student;
+Empty set (0.01 sec)
+mysql> desc student;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| RollNo | int          | NO   | PRI | NULL    |       |
+| Name   | varchar(255) | YES  |     | NULL    |       |
+| Age    | int          | YES  |     | NULL    |       |
+| Course | varchar(50)  | YES  |     | NULL    |       |
+| Year   | int          | YES  |     | NULL    |       |
+| Marks  | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+mysql> DROP TABLE student;
+Query OK, 0 rows affected (0.05 sec)
+mysql> desc student;
+ERROR 1146 (42S02): Table 'jeswin.student' doesn't exist
+
+
+
+
+
+2)
+
+
+mysql> create table department(dept_id int primary key,dept_name varchar(20),dept_head varchar(20));
+Query OK, 0 rows affected (0.08 sec)
+mysql> create table employee(emp_id int primary key,emp_name varchar(20),dept_id int,salary int,foreign
+key(dept_id)references department(dept_id));
+Query OK, 0 rows affected (0.11 sec)
+mysql> insert into department values(1,'Accounting','Alan');
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into department values(2,'Production','Arun');
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into department values(3,'HR','Nandu');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into department values(4,'Research','Atul');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee values(101,'Ben',1,1000);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employee values(102,'Biby',2,1500);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee values(103,'Benoi',3,2500);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee values(104,'Joel',4,3500);
+Query OK, 1 row affected (0.01 sec)
+mysql> select * from employee;
++--------+----------+---------+--------+
+| emp_id | emp_name | dept_id | salary |
++--------+----------+---------+--------+
+|    101 | Ben      |       1 |   1000 |
+|    102 | Biby     |       2 |   1500 |
+|    103 | Benoi    |       3 |   2500 |
+|    104 | Joel     |       4 |   3500 |
++--------+----------+---------+--------+
+4 rows in set (0.00 sec)
+mysql> select * from department;
++---------+------------+-----------+
+| dept_id | dept_name  | dept_head |
++---------+------------+-----------+
+|       1 | Accounting | Alan      |
+|       2 | Production | Arun      |
+|       3 | HR         | Nandu     |
+|       4 | Research   | Atul      |
++---------+------------+-----------+
+4 rows in set (0.00 sec)
+mysql> update department set dept_head='Fasil' where dept_id=4;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> select * from department;
++---------+------------+-----------+
+| dept_id | dept_name  | dept_head |
++---------+------------+-----------+
+|       1 | Accounting | Alan      |
+|       2 | Production | Arun      |
+|       3 | HR         | Nandu     |
+|       4 | Research   | Fasil     |
++---------+------------+-----------+
+4 rows in set (0.00 sec)
+mysql> delete from employee where emp_id=105;
+Query OK, 0 rows affected (0.00 sec)
+mysql> select * from employee;
++--------+----------+---------+--------+
+| emp_id | emp_name | dept_id | salary |
++--------+----------+---------+--------+
+|    101 | Ben      |       1 |   1000 |
+|    102 | Biby     |       2 |   1500 |
+|    103 | Benoi    |       3 |   2500 |
+|    104 | Joel     |       4 |   3500 |
++--------+----------+---------+--------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+
+3)
+
+
+mysql> create table employee(emp_id int primary key,emp_name text not null,emp_add text not null,emp_phone text not null,dept_id text not null,dept_name text not null,salary text not null);
+Query OK, 0 rows affected (0.08 sec)
+mysql> insert into employee values(1,'Ramesh','GNoida','9855498465','3445','Sales','25000');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee values(2,'Suresh','GNoida','98565498465','0072','Sales','75000');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee values(3,'Rajesh','GNoida','9855497865','2324','Sales','28000');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee values(4,'Shyamu','BSB','9853698465','8883','Sales','35000');
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employee values(5,'Ramu','BSB','9855498235','74568','Sales','96000');
+Query OK, 1 row affected (0.01 sec)
+mysql> select * from employee;
++--------+----------+---------+-------------+---------+-----------+--------+
+| emp_id | emp_name | emp_add | emp_phone   | dept_id | dept_name | salary |
++--------+----------+---------+-------------+---------+-----------+--------+
+|      1 | Ramesh   | GNoida  | 9855498465  | 3445    | Sales     | 25000  |
+|      2 | Suresh   | GNoida  | 98565498465 | 0072    | Sales     | 75000  |
+|      3 | Rajesh   | GNoida  | 9855497865  | 2324    | Sales     | 28000  |
+|      4 | Shyamu   | BSB     | 9853698465  | 8883    | Sales     | 35000  |
+|      5 | Ramu     | BSB     | 9855498235  | 74568   | Sales     | 96000  |
++--------+----------+---------+-------------+---------+-----------+--------+
+5 rows in set (0.00 sec)
+mysql> create user 'xyz' identified by 'a123';
+Query OK, 0 rows affected (0.04 sec)
+mysql> show grants for xyz;
++---------------------------------+
+| Grants for xyz@%                |
++---------------------------------+
+| GRANT USAGE ON *.* TO `xyz`@`%` |
++---------------------------------+
+1 row in set (0.00 sec)
+mysql> grant select,insert on employee to xyz;
+Query OK, 0 rows affected (0.02 sec)
+mysql> show grants for xyz;
++---------------------------------------------------------+
+| Grants for xyz@%                                        |
++---------------------------------------------------------+
+| GRANT USAGE ON *.* TO `xyz`@`%`                         |
+| GRANT SELECT, INSERT ON `sales`.`employee` TO `xyz`@`%` |
++---------------------------------------------------------+
+2 rows in set (0.00 sec)
+mysql> select * from employee;
++--------+----------+---------+-------------+---------+-----------+--------+
+| emp_id | emp_name | emp_add | emp_phone   | dept_id | dept_name | salary |
++--------+----------+---------+-------------+---------+-----------+--------+
+|      1 | Ramesh   | GNoida  | 9855498465  | 3445    | Sales     | 25000  |
+|      2 | Suresh   | GNoida  | 98565498465 | 0072    | Sales     | 75000  |
+|      3 | Rajesh   | GNoida  | 9855497865  | 2324    | Sales     | 28000  |
+|      4 | Shyamu   | BSB     | 9853698465  | 8883    | Sales     | 35000  |
+|      5 | Ramu     | BSB     | 9855498235  | 74568   | Sales     | 96000  |
++--------+----------+---------+-------------+---------+-----------+--------+
+5 rows in set (0.00 sec)
+mysql> revoke all on employee from xyz;
+Query OK, 0 rows affected (0.01 sec)
+mysql> select * from employee;
++--------+----------+---------+-------------+---------+-----------+--------+
+| emp_id | emp_name | emp_add | emp_phone   | dept_id | dept_name | salary |
++--------+----------+---------+-------------+---------+-----------+--------+
+|      1 | Ramesh   | GNoida  | 9855498465  | 3445    | Sales     | 25000  |
+|      2 | Suresh   | GNoida  | 98565498465 | 0072    | Sales     | 75000  |
+|      3 | Rajesh   | GNoida  | 9855497865  | 2324    | Sales     | 28000  |
+|      4 | Shyamu   | BSB     | 9853698465  | 8883    | Sales     | 35000  |
+|      5 | Ramu     | BSB     | 9855498235  | 74568   | Sales     | 96000  |
++--------+----------+---------+-------------+---------+-----------+--------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+4)
+
+
+
+mysql> CREATE TABLE student(rollno int,name varchar(20),course varchar(20));
+Query OK, 0 rows affected (0.07 sec)
+mysql> INSERT INTO student VALUES(1,'Ammu','MCA');
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO student VALUES(2,'Amal','MCA');
+Query OK, 1 row affected (0.01 sec)
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+mysql> SAVEPOINT a;
+Query OK, 0 rows affected (0.00 sec)
+mysql> SELECT * FROM student;
++--------+------+--------+
+| rollno | name | course |
++--------+------+--------+
+|      1 | Ammu | MCA    |
+|      2 | Amal | MCA    |
++--------+------+--------+
+2 rows in set (0.00 sec)
+mysql> INSERT INTO student VALUES(3,'Anju','MCA');
+Query OK, 1 row affected (0.00 sec)
+mysql> INSERT INTO student VALUES(4,'Anet','MCA');
+Query OK, 1 row affected (0.00 sec)
+mysql> SELECT * FROM student;
++--------+------+--------+
+| rollno | name | course |
++--------+------+--------+
+|      1 | Ammu | MCA    |
+|      2 | Amal | MCA    |
+|      3 | Anju | MCA    |
+|      4 | Anet | MCA    |
++--------+------+--------+
+4 rows in set (0.00 sec)
+mysql> ROLLBACK TO a;
+Query OK, 0 rows affected (0.01 sec)
+mysql> SELECT * FROM student;
++--------+------+--------+
+| rollno | name | course |
++--------+------+--------+
+|      1 | Ammu | MCA    |
+|      2 | Amal | MCA    |
++--------+------+--------+
+2 rows in set (0.00 sec)
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+mysql> INSERT INTO student VALUES(5,'Arun','MCA');
+Query OK, 1 row affected (0.01 sec)
+mysql> SELECT * FROM student;
++--------+------+--------+
+| rollno | name | course |
++--------+------+--------+
+|      1 | Ammu | MCA    |
+|      2 | Amal | MCA    |
+|      5 | Arun | MCA    |
++--------+------+--------+
+3 rows in set (0.00 sec)
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+mysql> SELECT * FROM student;
++--------+------+--------+
+| rollno | name | course |
++--------+------+--------+
+|      1 | Ammu | MCA    |
+|      2 | Amal | MCA    |
+|      5 | Arun | MCA    |
++--------+------+--------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+
+5)
+
+
+mysql> create database Employee;
+Query OK, 1 row affected (0.02 sec)
+mysql> use Employee;
+Database changed
+mysql> create table employee(employee_id int primary key,name varchar(50),gender varchar(50),department varchar(50),education varchar(50),month_of_joining varchar(50),salary int);
+Query OK, 0 rows affected (0.11 sec)
+mysql> insert into employee(employee_id,name,gender,department,education,month_of_joining,salary)values(1001,'Ajay','M','Engineering','Doctoral','January',25);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee(employee_id,name,gender,department,education,month_of_joining,salary)values(1002,'Babloo','M','Engineering','UG','February',23);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employee(employee_id,name,gender,department,education,month_of_joining,salary)values(1003,'Chhavi','F','HR','PG','March',15);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee(employee_id,name,gender,department,education,month_of_joining,salary)values(1004,'Dheeraj','M','HR','UG','January',12);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee(employee_id,name,gender,department,education,month_of_joining,salary)values(1005,'Evina','F','Marketing','UG','March',16);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employee(employee_id,name,gender,department,education,month_of_joining,salary)values(1006,'Fredy','M','Sales','UG','December',10);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee(employee_id,name,gender,department,education,month_of_joining,salary)values(1007,'Garima','F','Sales','PG','March',10);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employee(employee_id,name,gender,department,education,month_of_joining,salary)values(1008,'Hans','M','Admin','PG','November',8);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee(employee_id,name,gender,department,education,month_of_joining,salary)values(1009,'Ivanka','F','Admin','Intermediate','April',7);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employee(employee_id,name,gender,department,education,month_of_joining,salary)values(1010,'Jai','M','Peon','High School','December',4);
+Query OK, 1 row affected (0.01 sec)
+mysql> select * from employee;
++-------------+---------+--------+-------------+--------------+------------------+--------+
+| employee_id | name    | gender | department  | education    | month_of_joining | salary |
++-------------+---------+--------+-------------+--------------+------------------+--------+
+|        1001 | Ajay    | M      | Engineering | Doctoral     | January          |     25 |
+|        1002 | Babloo  | M      | Engineering | UG           | February         |     23 |
+|        1003 | Chhavi  | F      | HR          | PG           | March            |     15 |
+|        1004 | Dheeraj | M      | HR          | UG           | January          |     12 |
+|        1005 | Evina   | F      | Marketing   | UG           | March            |     16 |
+|        1006 | Fredy   | M      | Sales       | UG           | December         |     10 |
+|        1007 | Garima  | F      | Sales       | PG           | March            |     10 |
+|        1008 | Hans    | M      | Admin       | PG           | November         |      8 |
+|        1009 | Ivanka  | F      | Admin       | Intermediate | April            |      7 |
+|        1010 | Jai     | M      | Peon        | High School  | December         |      4 |
++-------------+---------+--------+-------------+--------------+------------------+--------+
+10 rows in set (0.00 sec)
+mysql> select department,sum(salary) from employee group by department;
++-------------+-------------+
+| department  | sum(salary) |
++-------------+-------------+
+| Engineering |          48 |
+| HR          |          27 |
+| Marketing   |          16 |
+| Sales       |          20 |
+| Admin       |          15 |
+| Peon        |           4 |
++-------------+-------------+
+6 rows in set (0.01 sec)
+mysql> select department,sum(salary)from employee group by department having sum(salary)>=20;
++-------------+-------------+
+| department  | sum(salary) |
++-------------+-------------+
+| Engineering |          48 |
+| HR          |          27 |
+| Sales       |          20 |
++-------------+-------------+
+3 rows in set (0.00 sec)
+mysql> select distinct department from employee;
++-------------+
+| department  |
++-------------+
+| Engineering |
+| HR          |
+| Marketing   |
+| Sales       |
+| Admin       |
+| Peon        |
++-------------+
+6 rows in set (0.00 sec)
+mysql> select count(salary)from employee;
++---------------+
+| count(salary) |
++---------------+
+|            10 |
++---------------+
+1 row in set (0.00 sec)
+mysql> select * from employee where department='Engineering' and education='Doctorial';
+Empty set (0.00 sec)
+mysql> select * from employee where department='Engineering' and education='Doctoral';
++-------------+------+--------+-------------+-----------+------------------+--------+
+| employee_id | name | gender | department  | education | month_of_joining | salary |
++-------------+------+--------+-------------+-----------+------------------+--------+
+|        1001 | Ajay | M      | Engineering | Doctoral  | January          |     25 |
++-------------+------+--------+-------------+-----------+------------------+--------+
+1 row in set (0.00 sec)
+mysql> select * from employee where department='Engineering' or  education='Doctoral';
++-------------+--------+--------+-------------+-----------+------------------+--------+
+| employee_id | name   | gender | department  | education | month_of_joining | salary |
++-------------+--------+--------+-------------+-----------+------------------+--------+
+|        1001 | Ajay   | M      | Engineering | Doctoral  | January          |     25 |
+|        1002 | Babloo | M      | Engineering | UG        | February         |     23 |
++-------------+--------+--------+-------------+-----------+------------------+--------+
+2 rows in set (0.00 sec)
+mysql> select name as first_name,education as qualification from employee;
++------------+---------------+
+| first_name | qualification |
++------------+---------------+
+| Ajay       | Doctoral      |
+| Babloo     | UG            |
+| Chhavi     | PG            |
+| Dheeraj    | UG            |
+| Evina      | UG            |
+| Fredy      | UG            |
+| Garima     | PG            |
+| Hans       | PG            |
+| Ivanka     | Intermediate  |
+| Jai        | High School   |
++------------+---------------+
+10 rows in set (0.00 sec)
+mysql> select * from employee where name like 'A%';
++-------------+------+--------+-------------+-----------+------------------+--------+
+| employee_id | name | gender | department  | education | month_of_joining | salary |
++-------------+------+--------+-------------+-----------+------------------+--------+
+|        1001 | Ajay | M      | Engineering | Doctoral  | January          |     25 |
++-------------+------+--------+-------------+-----------+------------------+--------+
+1 row in set (0.01 sec)
+mysql> select department,sum(salary) from employee where education<>'UG' group by department having sum(salary)>=20;
++-------------+-------------+
+| department  | sum(salary) |
++-------------+-------------+
+| Engineering |          25 |
++-------------+-------------+
+1 row in set (0.00 sec)
+mysql> select department ,sum(salary) from employee group by department having sum(salary)>=15 order by sum(salary)desc;
++-------------+-------------+
+| department  | sum(salary) |
++-------------+-------------+
+| Engineering |          48 |
+| HR          |          27 |
+| Sales       |          20 |
+| Marketing   |          16 |
+| Admin       |          15 |
++-------------+-------------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+6)
+
+
+mysql> create database sales;
+Query OK, 1 row affected (0.02 sec)
+mysql> use sales;
+Database changed
+mysql> create table salesman(salesman_id int primary key,name varchar(20),city varchar(20),commission decimal(5,2));
+Query OK, 0 rows affected (0.08 sec)
+mysql> insert into salesman values(5001,'James Hoog','New York',0.15);
+Query OK, 1 row affected (0.03 sec)
+mysql> insert into salesman values(5002,'Nail Knite','Paris',0.13);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into salesman values(5005,'Pit Alex','London',0.11);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into salesman values(5006,'Mc Lyon','Paris',0.14);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into salesman values(5007,'Paul Adam','Rome',0.13);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into salesman values(5003,'Lauson Hen','San Jose',0.12);
+Query OK, 1 row affected (0.02 sec)
+mysql> create table customer(customer_id int primary key,cust_name varchar(20),city varchar(20),grade int,salesman_id int);
+Query OK, 0 rows affected (0.09 sec)
+mysql> insert into customer values(3002,'Nick Rimando','New York',100,5001);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into customer values(3007,'Brad Davis','New York',200,5001);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into customer values(3005,'Graham Zusi','California',200,5002);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into customer values(3008,'Julian Green','London',300,5002);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into customer values(3004,'Fabian Johnson','Paris',300,5006);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into customer values(3009,'Geoff Cameron','Berlin',100,5003);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into customer values(3003,'Jozy Altidor','Moscow',200,5007);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into customer values(3001,'Brad Guzan','London',100,5005);
+Query OK, 1 row affected (0.02 sec)
+mysql> create table orders(ord_no int primary key,purch_amt decimal(10,2),ord_date date,customer_id int,salesman_id int);
+Query OK, 0 rows affected (0.09 sec)
+mysql> insert into orders values(70001,150.5,'2012-10-05',3005,5002);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into orders values(70009,270.65,'2012-09-10',3001,5005);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into orders values(70002,65.26,'2012-10-05',3002,5001);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into orders values(70004,110.5,'2012-08-17',3009,5003);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into orders values(70007,948.5,'2012-09-10',3005,5002);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into orders values(70005,2400.6,'2012-07-27',3007,5001);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into orders values(70008,5760,'2012-09-10',3002,5001);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into orders values(70010,1983.43,'2012-10-10',3004,5006);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into orders values(70003,2480.4,'2012-10-10',3009,5003);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into orders values(70012,250.45,'2012-06-27',3008,5002);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into orders values(70011,75.29,'2012-08-17',3003,5007);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into orders values(70013,3045.6,'2012-04-25',3002,5001);
+Query OK, 1 row affected (0.01 sec)
+mysql> select * from orders;
++--------+-----------+------------+-------------+-------------+
+| ord_no | purch_amt | ord_date   | customer_id | salesman_id |
++--------+-----------+------------+-------------+-------------+
+|  70001 |    150.50 | 2012-10-05 |        3005 |        5002 |
+|  70002 |     65.26 | 2012-10-05 |        3002 |        5001 |
+|  70003 |   2480.40 | 2012-10-10 |        3009 |        5003 |
+|  70004 |    110.50 | 2012-08-17 |        3009 |        5003 |
+|  70005 |   2400.60 | 2012-07-27 |        3007 |        5001 |
+|  70007 |    948.50 | 2012-09-10 |        3005 |        5002 |
+|  70008 |   5760.00 | 2012-09-10 |        3002 |        5001 |
+|  70009 |    270.65 | 2012-09-10 |        3001 |        5005 |
+|  70010 |   1983.43 | 2012-10-10 |        3004 |        5006 |
+|  70011 |     75.29 | 2012-08-17 |        3003 |        5007 |
+|  70012 |    250.45 | 2012-06-27 |        3008 |        5002 |
+|  70013 |   3045.60 | 2012-04-25 |        3002 |        5001 |
++--------+-----------+------------+-------------+-------------+
+12 rows in set (0.01 sec)
+mysql> select * from salesman;
++-------------+------------+----------+------------+
+| salesman_id | name       | city     | commission |
++-------------+------------+----------+------------+
+|        5001 | James Hoog | New York |       0.15 |
+|        5002 | Nail Knite | Paris    |       0.13 |
+|        5003 | Lauson Hen | San Jose |       0.12 |
+|        5005 | Pit Alex   | London   |       0.11 |
+|        5006 | Mc Lyon    | Paris    |       0.14 |
+|        5007 | Paul Adam  | Rome     |       0.13 |
++-------------+------------+----------+------------+
+6 rows in set (0.00 sec)
+mysql> select * from customer;
++-------------+----------------+------------+-------+-------------+
+| customer_id | cust_name      | city       | grade | salesman_id |
++-------------+----------------+------------+-------+-------------+
+|        3001 | Brad Guzan     | London     |   100 |        5005 |
+|        3002 | Nick Rimando   | New York   |   100 |        5001 |
+|        3003 | Jozy Altidor   | Moscow     |   200 |        5007 |
+|        3004 | Fabian Johnson | Paris      |   300 |        5006 |
+|        3005 | Graham Zusi    | California |   200 |        5002 |
+|        3007 | Brad Davis     | New York   |   200 |        5001 |
+|        3008 | Julian Green   | London     |   300 |        5002 |
+|        3009 | Geoff Cameron  | Berlin     |   100 |        5003 |
++-------------+----------------+------------+-------+-------------+
+8 rows in set (0.00 sec)
+mysql> create view newyorkstaff as select * from salesman where city='New York';
+Query OK, 0 rows affected (0.02 sec)
+mysql> select * from newyorkstaff;
++-------------+------------+----------+------------+
+| salesman_id | name       | city     | commission |
++-------------+------------+----------+------------+
+|        5001 | James Hoog | New York |       0.15 |
++-------------+------------+----------+------------+
+1 row in set (0.01 sec)
+mysql> create view gradecount(grade,number)as select grade,count(*) from customer group by grade;
+Query OK, 0 rows affected (0.02 sec)
+mysql> select * from gradecount;
++-------+--------+
+| grade | number |
++-------+--------+
+|   100 |      3 |
+|   200 |      3 |
+|   300 |      2 |
++-------+--------+
+3 rows in set (0.00 sec)
+mysql> create view totalforday as select ord_date,count(distinct customer_id),avg(purch_amt),sum(purch_amt) from orders group by ord_date;
+Query OK, 0 rows affected (0.02 sec)
+mysql> select * from totalforday;
++------------+-----------------------------+----------------+----------------+
+| ord_date   | count(distinct customer_id) | avg(purch_amt) | sum(purch_amt) |
++------------+-----------------------------+----------------+----------------+
+| 2012-04-25 |                           1 |    3045.600000 |        3045.60 |
+| 2012-06-27 |                           1 |     250.450000 |         250.45 |
+| 2012-07-27 |                           1 |    2400.600000 |        2400.60 |
+| 2012-08-17 |                           2 |      92.895000 |         185.79 |
+| 2012-09-10 |                           3 |    2326.383333 |        6979.15 |
+| 2012-10-05 |                           2 |     107.880000 |         215.76 |
+| 2012-10-10 |                           2 |    2231.915000 |        4463.83 |
++------------+-----------------------------+----------------+----------------+
+7 rows in set (0.00 sec)
+mysql> create view sorder as select salesman_id,ord_no,customer_id from orders wheQuery OK, 0 rows affected (0.02 sec)-10');
+mysql> select * from sorder;
++-------------+--------+-------------+
+| salesman_id | ord_no | customer_id |
++-------------+--------+-------------+
+|        5003 |  70003 |        3009 |
+|        5003 |  70004 |        3009 |
+|        5006 |  70010 |        3004 |
+|        5007 |  70011 |        3003 |
++-------------+--------+-------------+
+4 rows in set (0.01 sec)
+mysql> create view elitsalesman as select b.ord_date,a.salesman_id,a.name from salesman a,orders b where a.salesman_id=b.salesman_id and b.purch_amt=(select max(purch_amt)from orders c where c.ord_date=b.ord_date);
+Query OK, 0 rows affected (0.02 sec)
+mysql> select * from elitsalesman;
++------------+-------------+------------+
+| ord_date   | salesman_id | name       |
++------------+-------------+------------+
+| 2012-10-05 |        5002 | Nail Knite |
+| 2012-10-10 |        5003 | Lauson Hen |
+| 2012-08-17 |        5003 | Lauson Hen |
+| 2012-07-27 |        5001 | James Hoog |
+| 2012-09-10 |        5001 | James Hoog |
+| 2012-06-27 |        5002 | Nail Knite |
+| 2012-04-25 |        5001 | James Hoog |
++------------+-------------+------------+
+7 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+7)
+
+mysql> create table employees(emp_id int primary key,emp_name varchar(20),emp_age int,city varchar(20),income int);
+Query OK, 0 rows affected (0.10 sec)
+mysql> insert into employees values(101,'Peter',32,'Newyork',200000);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employees values(102,'Mark',32,'California',300000);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employees values(103,'Donald',40,'Arizona',1000000);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employees values(104,'Obama',35,'Florida',5000000);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employees values(105,'Linklon',32,'Georgia',250000);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employees values(106,'Kane',45,'Alaska',450000);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employees values(107,'Adam',35,'California',5000000);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employees values(108,'Macculam',40,'Florida',350000);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employees values(109,'Brayan',32,'Alaska',400000);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into employees values(110,'Stephen',40,'Arizona',600000);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into employees values(111,'Alexander',45,'California',70000);
+Query OK, 1 row affected (0.02 sec)
+mysql> select * from employees;
++--------+-----------+---------+------------+---------+
+| emp_id | emp_name  | emp_age | city       | income  |
++--------+-----------+---------+------------+---------+
+|    101 | Peter     |      32 | Newyork    |  200000 |
+|    102 | Mark      |      32 | California |  300000 |
+|    103 | Donald    |      40 | Arizona    | 1000000 |
+|    104 | Obama     |      35 | Florida    | 5000000 |
+|    105 | Linklon   |      32 | Georgia    |  250000 |
+|    106 | Kane      |      45 | Alaska     |  450000 |
+|    107 | Adam      |      35 | California | 5000000 |
+|    108 | Macculam  |      40 | Florida    |  350000 |
+|    109 | Brayan    |      32 | Alaska     |  400000 |
+|    110 | Stephen   |      40 | Arizona    |  600000 |
+|    111 | Alexander |      45 | California |   70000 |
++--------+-----------+---------+------------+---------+
+11 rows in set (0.00 sec)
+mysql> select emp_name,city,income from employees where emp_id in (select emp_id from employees);
++-----------+------------+---------+
+| emp_name  | city       | income  |
++-----------+------------+---------+
+| Peter     | Newyork    |  200000 |
+| Mark      | California |  300000 |
+| Donald    | Arizona    | 1000000 |
+| Obama     | Florida    | 5000000 |
+| Linklon   | Georgia    |  250000 |
+| Kane      | Alaska     |  450000 |
+| Adam      | California | 5000000 |
+| Macculam  | Florida    |  350000 |
+| Brayan    | Alaska     |  400000 |
+| Stephen   | Arizona    |  600000 |
+| Alexander | California |   70000 |
++-----------+------------+---------+
+11 rows in set (0.00 sec)
+mysql> select * from employees where emp_id in(select emp_id from employees where income >350000);
++--------+----------+---------+------------+---------+
+| emp_id | emp_name | emp_age | city       | income  |
++--------+----------+---------+------------+---------+
+|    103 | Donald   |      40 | Arizona    | 1000000 |
+|    104 | Obama    |      35 | Florida    | 5000000 |
+|    106 | Kane     |      45 | Alaska     |  450000 |
+|    107 | Adam     |      35 | California | 5000000 |
+|    109 | Brayan   |      32 | Alaska     |  400000 |
+|    110 | Stephen  |      40 | Arizona    |  600000 |
++--------+----------+---------+------------+---------+
+6 rows in set (0.00 sec)
+mysql> select emp_name,city,income from employees where income=(select max(income)from employees);
++----------+------------+---------+
+| emp_name | city       | income  |
++----------+------------+---------+
+| Obama    | Florida    | 5000000 |
+| Adam     | California | 5000000 |
++----------+------------+---------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+8)
+
+mysql> create table boats(bid int primary key,bname varchar(20),color varchar(20));
+Query OK, 0 rows affected (0.08 sec)
+mysql> insert into boats values(101,'Interlake','blue');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into boats values(102,'Interlake','red');
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into boats values(103,'Clipper','green');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into boats values(104,'Marine','red');
+Query OK, 1 row affected (0.02 sec)
+mysql> select * from boats;
++-----+-----------+-------+
+| bid | bname     | color |
++-----+-----------+-------+
+| 101 | Interlake | blue  |
+| 102 | Interlake | red   |
+| 103 | Clipper   | green |
+| 104 | Marine    | red   |
++-----+-----------+-------+
+4 rows in set (0.00 sec)
+mysql> create table sailors(sid int primary key,sname varchar(200),rating int,age decimal(5,2));
+Query OK, 0 rows affected (0.09 sec)
+mysql> insert into sailors values(22,'Dustin',7,45.0);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into sailors values(29,'Brutus',1,33.0);
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into sailors values(31,'Lubber',8,55.5);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into sailors values(32,'Andy',8,25.5);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into sailors values(58,'Rusty',10,35.0);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into sailors values(64,'Horatio',7,35.0);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into sailors values(71,'Zorba',10,16.0);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into sailors values(74,'Horatio',9,35.0);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into sailors values(85,'Art',3,25.5);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into sailors values(95,'Bob',3,63.5);
+Query OK, 1 row affected (0.02 sec)
+mysql> select * from sailors;
++-----+---------+--------+-------+
+| sid | sname   | rating | age   |
++-----+---------+--------+-------+
+|  22 | Dustin  |      7 | 45.00 |
+|  29 | Brutus  |      1 | 33.00 |
+|  31 | Lubber  |      8 | 55.50 |
+|  32 | Andy    |      8 | 25.50 |
+|  58 | Rusty   |     10 | 35.00 |
+|  64 | Horatio |      7 | 35.00 |
+|  71 | Zorba   |     10 | 16.00 |
+|  74 | Horatio |      9 | 35.00 |
+|  85 | Art     |      3 | 25.50 |
+|  95 | Bob     |      3 | 63.50 |
++-----+---------+--------+-------+
+10 rows in set (0.00 sec)
+mysql> create table reserves(sid int,bid int,day date,foreign key(sid) references sailors(sid),foreign key(bid) references boats(bid));
+Query OK, 0 rows affected (0.12 sec)
+mysql> insert into reserves values(22,101,'98/10/10');
+Query OK, 1 row affected, 1 warning (0.02 sec)
+mysql> insert into reserves values(22,102,'98/10/10');
+Query OK, 1 row affected, 1 warning (0.02 sec)
+mysql> insert into reserves values(22,103,'98/8/10');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+mysql> insert into reserves values(22,104,'98/7/10');
+Query OK, 1 row affected, 1 warning (0.02 sec)
+mysql> insert into reserves values(31,102,'98/10/11');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+mysql> insert into reserves values(31,103,'98/6/11');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+mysql> insert into reserves values(31,104,'98/12/11');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+mysql> insert into reserves values(64,101,'98/5/9');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+mysql> insert into reserves values(64,102,'98/8/9');
+Query OK, 1 row affected, 1 warning (0.02 sec)
+mysql> insert into reserves values(74,103,'98/8/9');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+mysql> select * from reserves;
++------+------+------------+
+| sid  | bid  | day        |
++------+------+------------+
+|   22 |  101 | 1998-10-10 |
+|   22 |  102 | 1998-10-10 |
+|   22 |  103 | 1998-08-10 |
+|   22 |  104 | 1998-07-10 |
+|   31 |  102 | 1998-10-11 |
+|   31 |  103 | 1998-06-11 |
+|   31 |  104 | 1998-12-11 |
+|   64 |  101 | 1998-05-09 |
+|   64 |  102 | 1998-08-09 |
+|   74 |  103 | 1998-08-09 |
++------+------+------------+
+10 rows in set (0.00 sec)
+mysql> select count(distinct color)from boats;
++-----------------------+
+| count(distinct color) |
++-----------------------+
+|                     3 |
++-----------------------+
+1 row in set (0.00 sec)
+mysql> select sailors.*from sailors,reserves where sailors.sid=reserves.sid and reserves.bid=101;
++-----+---------+--------+-------+
+| sid | sname   | rating | age   |
++-----+---------+--------+-------+
+|  22 | Dustin  |      7 | 45.00 |
+|  64 | Horatio |      7 | 35.00 |
++-----+---------+--------+-------+
+2 rows in set (0.00 sec)
+mysql> select * from sailors where sid in(select sid from reserves where bid=101);
++-----+---------+--------+-------+
+| sid | sname   | rating | age   |
++-----+---------+--------+-------+
+|  22 | Dustin  |      7 | 45.00 |
+|  64 | Horatio |      7 | 35.00 |
++-----+---------+--------+-------+
+2 rows in set (0.00 sec)
+mysql> select sname from sailors s,reserves r where s.sid=r.sid;
++---------+
+| sname   |
++---------+
+| Dustin  |
+| Dustin  |
+| Dustin  |
+| Dustin  |
+| Lubber  |
+| Lubber  |
+| Lubber  |
+| Horatio |
+| Horatio |
+| Horatio |
++---------+
+10 rows in set (0.00 sec)
+mysql> select sname,age from sailors where sid in(select sid from reserves,boats where reserves.bid=boats.bid and color='red')order by age;
++---------+-------+
+| sname   | age   |
++---------+-------+
+| Horatio | 35.00 |
+| Dustin  | 45.00 |
+| Lubber  | 55.50 |
++---------+-------+
+3 rows in set (0.00 sec)
+mysql> select b.bname,s.sname from boats b inner join reserves r on b.bid=r.bid inner join sailors s on s.sid=r.sid;
++-----------+---------+
+| bname     | sname   |
++-----------+---------+
+| Interlake | Dustin  |
+| Interlake | Horatio |
+| Interlake | Dustin  |
+| Interlake | Lubber  |
+| Interlake | Horatio |
+| Clipper   | Dustin  |
+| Clipper   | Lubber  |
+| Clipper   | Horatio |
+| Marine    | Dustin  |
+| Marine    | Lubber  |
++-----------+---------+
+10 rows in set (0.00 sec)
+mysql> select distinct s.sid,s.sname from sailors s,reserves r1,reserves r2 where s.sid=r1.sid and r1.day=r2.day and r1.bid<>r2.bid;
++-----+---------+
+| sid | sname   |
++-----+---------+
+|  22 | Dustin  |
+|  64 | Horatio |
+|  74 | Horatio |
++-----+---------+
+3 rows in set (0.00 sec)
+mysql> select r.sid from boats b,reserves r where r.bid=b.bid and b.color='red' union select r2.sid from boats b2,reserves r2 where r2.bid=b2.bid and b2.color='green';
++------+
+| sid  |
++------+
+|   22 |
+|   31 |
+|   64 |
+|   74 |
++------+
+4 rows in set (0.00 sec)
+mysql> select s.sname from sailors s where not exists(select b.bid from boats b where not
+ exists(select r.bid from reserves r where r.bid=b.bid and r.sid=s.sid));
++--------+
+| sname  |
++--------+
+| Dustin |
++--------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+9)
+
+mysql> create table student(rollno int primary key,name varchar(255),course varchar(200),year int);
+Query OK, 0 rows affected (0.09 sec)
+mysql> insert into student values(1,'ammu','bams',2023);
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into student values(2,'binil','bca',2020);
+Query OK, 1 row affected (0.02 sec)
+mysql> select * from student;
++--------+-------+--------+------+
+| rollno | name  | course | year |
++--------+-------+--------+------+
+|      1 | ammu  | bams   | 2023 |
+|      2 | binil | bca    | 2020 |
++--------+-------+--------+------+
+2 rows in set (0.00 sec)
+mysql> delimiter //
+mysql> create procedure display()
+    -> begin
+    -> select * from student;
+    -> end
+    -> //
+Query OK, 0 rows affected (0.02 sec)
+mysql> delimiter ;
+mysql> call display();
++--------+-------+--------+------+
+| rollno | name  | course | year |
++--------+-------+--------+------+
+|      1 | ammu  | bams   | 2023 |
+|      2 | binil | bca    | 2020 |
++--------+-------+--------+------+
+2 rows in set (0.00 sec)
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+
+
+
+
+
+
+10)
+
+mysql> delimiter //
+mysql> create procedure `sum`(in a int,in b int)
+    -> begin
+    -> declare c int;
+    -> set c=a+b;
+    -> select concat('sum of two numbers=',c)as result;
+    -> end //
+Query OK, 0 rows affected (0.02 sec)
+mysql> delimiter ;
+mysql> call `sum`(5,10);
++-----------------------+
+| result                |
++-----------------------+
+| sum of two numbers=15 |
++-----------------------+
+1 row in set (0.00 sec)
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+
+
+11)
+
+mysql> delimiter //
+mysql> create procedure checkoddoreven(in input_number int)
+    -> begin
+    ->  if mod(input_number,2) = 0 then
+    ->    select 'even' as result;
+    -> else
+    ->    select 'odd' as result;
+    ->  end if;
+    -> end //
+Query OK, 0 rows affected (0.02 sec)
+mysql> delimiter ;
+mysql> call checkoddoreven(2);
++--------+
+| result |
++--------+
+| even   |
++--------+
+1 row in set (0.00 sec)
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+
+
+
+
+
+
+12)
+
+mysql> delimiter //
+mysql> create procedure factorial(in a int)
+    -> begin
+    -> declare f int default 1;
+    -> while a>0 do
+    -> set f=f*a;
+    -> set a=a-1;
+    -> end while;
+    -> select concat('factorial=',f)as result;
+    -> end //
+Query OK, 0 rows affected (0.02 sec)
+mysql> delimiter ;
+mysql> call factorial(6);
++---------------+
+| result        |
++---------------+
+| factorial=720 |
++---------------+
+1 row in set (0.00 sec)
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+
+
+
+13)
+
+mysql> delimiter //
+mysql> create procedure findmaxofthree(in a int,in b int,in c int)
+    -> begin
+    -> declare max_value int;
+    -> if a>=b and a>=c then
+    -> set max_value=a;
+    -> elseif b>=a and b>=c then
+    -> set max_value=b;
+    -> else
+    -> set max_value=c;
+    -> end if;
+    -> select concat('The maximum value is: ',max_value) as result;
+    -> end //
+Query OK, 0 rows affected (0.04 sec)
+mysql> delimiter ;
+mysql> call findmaxofthree(100,300,200);
++---------------------------+
+| result                    |
++---------------------------+
+| The maximum value is: 300 |
++---------------------------+
+1 row in set (0.00 sec)
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+14)
+
+mysql> delimiter //
+mysql> create procedure sumofdigits(in num int)
+    -> begin
+    -> declare sum int default 0;
+    -> declare digit int;
+    -> while num>0 do
+    -> set digit=num mod 10;
+    -> set sum=sum+digit;
+    -> set num=num div 10;
+    -> end while;
+    -> select concat('The sum of digits is: ',sum) as result;
+    -> end //
+Query OK, 0 rows affected (0.02 sec)
+mysql> delimiter ;
+mysql> call sumofdigits(163);
++--------------------------+
+| result                   |
++--------------------------+
+| The sum of digits is: 10 |
++--------------------------+
+1 row in set (0.00 sec)
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+
+
+15)
+
+mysql> create table employees(
+    -> employee_id int primary key,
+    -> first_name varchar(50),
+    -> last_name varchar(50),
+    -> salary decimal(10,2)
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+mysql> create table audit_log(
+    -> log_id int primary key auto_increment,
+    -> action varchar(255),
+    -> timestamp timestamp default current_timestamp
+    -> );
+Query OK, 0 rows affected (0.17 sec)
+mysql> insert into employees(employee_id,first_name,last_name,salary)
+    -> values
+    -> (1,'John','Doe',50000.00),
+    -> (2,'Jane','Smith',60000.00),
+    -> (3,'Michael','Johnson',55000.00);
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+mysql> insert into audit_log(action,timestamp)
+    -> values
+    -> ('New employees added',current_timestamp);
+Query OK, 1 row affected (0.01 sec)
+mysql> select * from employees;
++-------------+------------+-----------+----------+
+| employee_id | first_name | last_name | salary   |
++-------------+------------+-----------+----------+
+|           1 | John       | Doe       | 50000.00 |
+|           2 | Jane       | Smith     | 60000.00 |
+|           3 | Michael    | Johnson   | 55000.00 |
++-------------+------------+-----------+----------+
+3 rows in set (0.00 sec)
+mysql> select * from audit_log;;
++--------+---------------------+---------------------+
+| log_id | action              | timestamp           |
++--------+---------------------+---------------------+
+|      1 | New employees added | 2025-03-18 14:36:21 |
++--------+---------------------+---------------------+
+1 row in set (0.00 sec)
+mysql> delimiter //
+mysql> 
+mysql> create trigger after_employee_insert
+    -> after insert on employees
+    -> for each row
+    -> begin
+    ->  insert into audit_log(action,timestamp)
+    ->  values('New employee inserted',now());
+    -> end //
+Query OK, 0 rows affected (0.02 sec)
+mysql> delimiter ;
+mysql> insert into employees(employee_id,first_name,last_name,salary)
+    -> values(4,'Minnu','Joseph',65000.00);
+Query OK, 1 row affected (0.02 sec)
+mysql> select * from employees;
++-------------+------------+-----------+----------+
+| employee_id | first_name | last_name | salary   |
++-------------+------------+-----------+----------+
+|           1 | John       | Doe       | 50000.00 |
+|           2 | Jane       | Smith     | 60000.00 |
+|           3 | Michael    | Johnson   | 55000.00 |
+|           4 | Minnu      | Joseph    | 65000.00 |
++-------------+------------+-----------+----------+
+4 rows in set (0.00 sec)
+mysql> select * from audit_log;
++--------+-----------------------+---------------------+
+| log_id | action                | timestamp           |
++--------+-----------------------+---------------------+
+|      1 | New employees added   | 2025-03-18 14:36:21 |
+|      2 | New employee inserted | 2025-03-18 14:41:33 |
++--------+-----------------------+---------------------+
+2 rows in set (0.00 sec)
+
+
+
+
+16)
+
+mysql> create table std1(
+    -> studentid int primary key,
+    -> name varchar(20),
+    -> sub1 int,
+    -> sub2 int,
+    -> sub3 int,
+    -> sub4 int,
+    -> sub5 int,
+    -> total int,
+    -> per_marks int,
+    -> grade varchar(20)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+mysql> insert into std1(studentid,name,sub1,sub2,sub3,sub4,sub5)
+    -> values
+    ->  (1,'Student1',0,0,0,0,0),
+    ->  (2,'Student2',0,0,0,0,0);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+mysql> select * from std1;
++-----------+----------+------+------+------+------+------+-------+-----------+-------+
+| studentid | name     | sub1 | sub2 | sub3 | sub4 | sub5 | total | per_marks | grade |
++-----------+----------+------+------+------+------+------+-------+-----------+-------+
+|         1 | Student1 |    0 |    0 |    0 |    0 |    0 |  NULL |      NULL | NULL  |
+|         2 | Student2 |    0 |    0 |    0 |    0 |    0 |  NULL |      NULL | NULL  |
++-----------+----------+------+------+------+------+------+-------+-----------+-------+
+2 rows in set (0.00 sec)
+mysql> delimiter //
+mysql> create trigger std_before_update
+    -> before update on std1
+    -> for each row
+    -> begin
+    ->  declare total_marks int;
+    ->  declare per_marks int;
+    ->  declare grade varchar(20);
+    ->  set total_marks=new.sub1+new.sub2+new.sub3+new.sub4+new.sub5;
+    ->  set per_marks=total_marks/5;
+    ->  if per_marks>=90 then
+    ->   set grade='EXCELLENT';
+    ->  elseif per_marks>=75 and per_marks<90 then
+    ->   set grade='VERY GOOD';
+    ->  elseif per_marks>=60 and per_marks<75 then
+    ->   set grade='GOOD';
+    ->  elseif per_marks>=40 and per_marks<60 then
+    ->   set grade='AVERAGE';
+    ->  else
+    ->   set grade='NOT PROMOTED';
+    ->  end if;
+    ->  set new.total=total_marks;
+    ->  set new.per_marks=per_marks;
+    ->  set new.grade=grade;
+    -> end;
+    -> //
+Query OK, 0 rows affected (0.02 sec)
+mysql> delimiter ;
+mysql> update std1 set sub1=90,sub2=75,sub3=90,sub4=95,sub5=85 where studentid=1;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> select * from std1;
++-----------+----------+------+------+------+------+------+-------+-----------+-----------+
+| studentid | name     | sub1 | sub2 | sub3 | sub4 | sub5 | total | per_marks | grade     |
++-----------+----------+------+------+------+------+------+-------+-----------+-----------+
+|         1 | Student1 |   90 |   75 |   90 |   95 |   85 |   435 |        87 | VERY GOOD |
+|         2 | Student2 |    0 |    0 |    0 |    0 |    0 |  NULL |      NULL | NULL      |
++-----------+----------+------+------+------+------+------+-------+-----------+-----------+
+2 rows in set (0.00 sec)
+
+
+
+
+17)
+
+mysql> create  table  students(
+    -> id int not null auto_increment,
+    -> name varchar(45) not null,
+    -> class int not null,
+    -> email_id varchar(65) not null,
+    -> primary key (id)
+    -> );
+Query OK, 0 rows affected (0.19 sec)
+mysql> insert into students(name,class,email_id)
+    -> values('Stephen',6,'stephen@gmail.com'),
+    -> ('Bob',7,'bob@gmail.com'),
+    -> ('Steven',8,'steven@gmail.com'),
+    -> ('Alexandar',7,'alexandar@gmail.com');
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+mysql> create table student_log(
+    -> user varchar(45) not null,
+    -> descriptions varchar(65) not null
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+mysql> select * from students;
++----+-----------+-------+---------------------+
+| id | name      | class | email_id            |
++----+-----------+-------+---------------------+
+|  1 | Stephen   |     6 | stephen@gmail.com   |
+|  2 | Bob       |     7 | bob@gmail.com       |
+|  3 | Steven    |     8 | steven@gmail.com    |
+|  4 | Alexandar |     7 | alexandar@gmail.com |
++----+-----------+-------+---------------------+
+4 rows in set (0.00 sec)
+mysql> delimiter //
+mysql> create trigger after_apdate_stdnts
+    -> after update
+    -> on students
+    -> for each row
+    -> begin
+    ->  insert into student_log values(user(),
+    ->  concat('update student record',old.name,'previous class:',
+    ->  old.class,'present class',new.class));
+    -> end//
+Query OK, 0 rows affected (0.02 sec)
+mysql> delimiter ;
+mysql> select * from student_log;
+Empty set (0.00 sec)
+mysql> update students set class=class+1;
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+mysql> select * from student_log;
++----------------+--------------------------------------------------------------+
+| user           | descriptions                                                 |
++----------------+--------------------------------------------------------------+
+| root@localhost | update student recordStephenprevious class:6present class7   |
+| root@localhost | update student recordBobprevious class:7present class8       |
+| root@localhost | update student recordStevenprevious class:8present class9    |
+| root@localhost | update student recordAlexandarprevious class:7present class8 |
++----------------+--------------------------------------------------------------+
+4 rows in set (0.00 sec)
+mysql> select * from students;
++----+-----------+-------+---------------------+
+| id | name      | class | email_id            |
++----+-----------+-------+---------------------+
+|  1 | Stephen   |     7 | stephen@gmail.com   |
+|  2 | Bob       |     8 | bob@gmail.com       |
+|  3 | Steven    |     9 | steven@gmail.com    |
+|  4 | Alexandar |     8 | alexandar@gmail.com |
++----+-----------+-------+---------------------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+
+18)
+
+mysql> delimiter //
+mysql> create procedure calculate_av_salary()
+    -> begin
+    -> declare cur_salary int;
+    -> declare total_salary integer default 0;
+    -> declare num_rows integer default 0;
+    -> declare avg_salary integer default 0;
+    -> declare done boolean default false;
+    -> declare salary_cursor CURSOR FOR SELECT salary from employees;
+    -> declare continue handler for not found set done=true;
+    -> open salary_cursor;
+    -> fetch_loop:loop
+    -> fetch salary_cursor into cur_salary;
+    -> if done then
+    -> leave fetch_loop;
+    -> end if;
+    -> if cur_salary is not null then
+    -> set total_salary=total_salary+cur_salary;
+    -> set num_rows=num_rows+1;
+    -> end if;
+    -> end loop fetch_loop;
+    -> close salary_cursor;
+    -> if num_rows>0 then
+    -> set avg_salary=total_salary/num_rows;
+    -> end if;
+    -> select avg_salary;
+    -> end //
+Query OK, 0 rows affected (0.04 sec)
+mysql> delimiter ;
+mysql> select * from employees;
++-------------+------------+-----------+----------+
+| employee_id | first_name | last_name | salary   |
++-------------+------------+-----------+----------+
+|           1 | John       | Doe       | 50000.00 |
+|           2 | Jane       | Smith     | 60000.00 |
+|           3 | Michael    | Johnson   | 55000.00 |
+|           4 | Merin      | Joy       |  5000.00 |
++-------------+------------+-----------+----------+
+4 rows in set (0.01 sec)
+mysql> call calculate_av_salary();
++------------+
+| avg_salary |
++------------+
+|      42500 |
++------------+
+1 row in set (0.00 sec)
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+19)
+
+mysql> create table student(name varchar(50));
+Query OK, 0 rows affected (4.70 sec)
+mysql> insert into student values('binil');
+Query OK, 1 row affected (0.47 sec)
+mysql> insert into student values('ammu');
+Query OK, 1 row affected (0.78 sec)
+
+mysql> delimiter $$
+mysql> create procedure list_names(inout name_list varchar(4000))
+    -> begin
+    -> declare is_done integer default 0;
+    -> declare s_name varchar(100)default"";
+    -> declare stud_cursor cursor for select name from student;
+    -> declare continue handler for not found set is_done=1; open
+    -> stud_cursor;
+    -> get_list:loop
+    -> fetch stud_cursor into s_name;
+    -> if is_done = 1 then
+    -> leave get_list;
+    -> end if;
+    -> set name_list=concat(s_name,";",name_list);
+    -> end loop get_list;
+    -> close stud_cursor;
+    -> end $$
+Query OK, 0 rows affected (0.78 sec)
+mysql> delimiter ;
+mysql> set @name_list="";
+Query OK, 0 rows affected (0.00 sec)
+mysql> call list_names(@name_list);
+Query OK, 0 rows affected (0.00 sec)
+mysql> select@name_list;
++-------------+
+| @name_list  |
++-------------+
+| ammu;binil; |
++-------------+
+1 row in set (0.00 sec)
+
+
+20)
+
+mongo
+> use test
+switched to db test
+> db.createCollection("student")
+{ "ok" : 1 }
+> db.student.insert({rollno:101,name:"Alex",Branch:"MCA"})
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({rollno:102,name:"Maya",Branch:"MBA"})
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({rollno:101,name:"Niya",Branch:"BCA"})
+WriteResult({ "nInserted" : 1 })
+> db.student.find().pretty()
+{
+	"_id" : ObjectId("67eccd7a00a9ba99f4da8a13"),
+	"rollno" : 101,
+	"name" : "Alex",
+	"Branch" : "MCA"
+}
+{
+	"_id" : ObjectId("67eccd9700a9ba99f4da8a14"),
+	"rollno" : 102,
+	"name" : "Maya",
+	"Branch" : "MBA"
+}
+{
+	"_id" : ObjectId("67eccdb200a9ba99f4da8a15"),
+	"rollno" : 101,
+	"name" : "Niya",
+	"Branch" : "BCA"
+}
+
+
+
+
+21)
+
+> use Employee
+switched to db Employee
+> db.createCollection("EMPL")
+{ "ok" : 1 }
+> db.EMPL.insertMany([
+... {"Empno":1,"Name":"John Doe","Salary":60000,"Role":"Manager"},
+... {"Empno":2,"Name":"Alice Smith","Salary":50000,"Role":"Developer"},
+... {"Empno":3,"Name":"Michael Johnson","Salary":55000,"Role":"Accountant"},
+... {"Empno":4,"Name":"Merin Joy","Salary":45000,"Role":"Marketing Manager"}
+... ])
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("67eccfbd00a9ba99f4da8a16"),
+		ObjectId("67eccfbd00a9ba99f4da8a17"),
+		ObjectId("67eccfbd00a9ba99f4da8a18"),
+		ObjectId("67eccfbd00a9ba99f4da8a19")
+	]
+}
+> db.EMPL.find().pretty()
+{
+	"_id" : ObjectId("67eccfbd00a9ba99f4da8a16"),
+	"Empno" : 1,
+	"Name" : "John Doe",
+	"Salary" : 60000,
+	"Role" : "Manager"
+}
+{
+	"_id" : ObjectId("67eccfbd00a9ba99f4da8a17"),
+	"Empno" : 2,
+	"Name" : "Alice Smith",
+	"Salary" : 50000,
+	"Role" : "Developer"
+}
+{
+	"_id" : ObjectId("67eccfbd00a9ba99f4da8a18"),
+	"Empno" : 3,
+	"Name" : "Michael Johnson",
+	"Salary" : 55000,
+	"Role" : "Accountant"
+}
+{
+	"_id" : ObjectId("67eccfbd00a9ba99f4da8a19"),
+	"Empno" : 4,
+	"Name" : "Merin Joy",
+	"Salary" : 45000,
+	"Role" : "Marketing Manager"
+}
+> db.EMPL.find({"Role":"Manager"}).pretty()
+{
+	"_id" : ObjectId("67eccfbd00a9ba99f4da8a16"),
+	"Empno" : 1,
+	"Name" : "John Doe",
+	"Salary" : 60000,
+	"Role" : "Manager"
+}
+> db.EMPL.updateOne(
+... {"Name":"Alice Smith"},
+... {$set:{"Salary":55000}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+
+
+
+
+22)
+
+
+use ProductCatalog
+switched to db ProductCatalog
+> db.createCollection("Products")
+{
+"ok" : 0,
+"errmsg" : "a collection 'ProductCatalog.Products' already exists",
+"code" : 48,
+"codeName" : "NamespaceExists"
+}
+> db.Products.insertMany([
+... {"ProductID":1,"ProductName":"Laptop","Price":1000,"Quantity":20},
+... {"ProductID":2,"ProductName":"Smartphone","Price":500,"Quantity":30
+... },
+... {"ProductID":3,"ProductName":"Tablet","Price":2000,"Quantity":10},
+... {"ProductID":4,"ProductName":"Switch","Price":300,"Quantity":20}
+... ])
+{
+"acknowledged" : true,
+"insertedIds" : [
+ObjectId("67f35c7ee4804775b4e641b5"),
+ObjectId("67f35c7ee4804775b4e641b6"),
+ObjectId("67f35c7ee4804775b4e641b7"),
+ObjectId("67f35c7ee4804775b4e641b8")
+]
+}
+> db.Products.find().pretty()
+{
+"_id" : ObjectId("6618cad2d6931c5d10e19a8a"),
+"ProductID" : 1,
+"ProductName" : "Laptop",
+"Price" : 1000,
+"Quantity" : 30
+}
+{
+"_id" : ObjectId("67f35c7ee4804775b4e641b5"),
+"ProductID" : 1,
+"ProductName" : "Laptop",
+"Price" : 1000,
+"Quantity" : 20
+}
+
+{
+"_id" : ObjectId("67f35c7ee4804775b4e641b6"),
+"ProductID" : 2,
+"ProductName" : "Smartphone",
+"Price" : 500,
+"Quantity" : 30
+}
+{
+"_id" : ObjectId("67f35c7ee4804775b4e641b7"),
+"ProductID" : 3,
+"ProductName" : "Tablet",
+"Price" : 2000,
+"Quantity" : 10
+}
+{
+"_id" : ObjectId("67f35c7ee4804775b4e641b8"),
+"ProductID" : 4,
+"ProductName" : "Switch",
+"Price" : 300,
+"Quantity" : 20
+}
+> db.Products.updateOne(
+... {"ProductName":"Laptop"},
+... {$inc:{"Quantity":10}}
+... )
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.Products.deleteONe({"ProductName":"Smartphone"})
+2025-04-07T10:35:07.966+0530 E QUERY [thread1] TypeError: db.Products.deleteONe is not
+a function :
+@(shell):1:1
+
+
+
+
+
+
+23)
+
+
+
+> use students
+switched to db students
+> db.students.insert({name:"Tony",age:17,id:1,sec:"A",subject:["physics","maths"]})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:"Steve",age:37,id:2,sec:"A"})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:"Natasha",age:17,id:3,sec:"B",subject:["physics","english"]})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:"Bruce",age:21,id:4,sec:"B",subject:["physics","maths","biology","chemistry"]})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:"Nick",age:40,id:5,sec:"B",subject:["english"]})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:"Groot",age:4,id:6,sec:"A",subject:["english"]})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:"Thanos",age:4,id:7,sec:"A",subject:["maths","physics","chemistry"]})
+WriteResult({ "nInserted" : 1 })
+> db.students.find().pretty()
+{
+"_id" : ObjectId("67f36298a85110378f0c0065"),
+"name" : "Tony",
+"age" : 17,
+"id" : 1,
+"sec" : "A",
+"subject" : [
+"physics",
+"maths"
+]
+}
+{
+"_id" : ObjectId("67f362a0a85110378f0c0066"),
+"name" : "Steve",
+"age" : 37,
+"id" : 2,
+"sec" : "A"
+}
+{
+"_id" : ObjectId("67f362a4a85110378f0c0067"),
+"name" : "Natasha",
+"age" : 17,
+"id" : 3,
+"sec" : "B",
+"subject" : [
+"physics",
+"english"
+]
+}
+{
+"_id" : ObjectId("67f362aaa85110378f0c0068"),
+"name" : "Bruce",
+"age" : 21,
+"id" : 4,
+"sec" : "B",
+"subject" : [
+"physics",
+"maths",
+"biology",
+"chemistry"
+
+]
+}
+{
+"_id" : ObjectId("67f362b1a85110378f0c0069"),
+"name" : "Nick",
+"age" : 40,
+"id" : 5,
+"sec" : "B",
+"subject" : [
+"english"
+]
+}
+{
+"_id" : ObjectId("67f36077fc4431cdcca03692"),
+"name" : "Groot",
+"age" : 4,
+"id" : 6,
+"sec" : "A",
+"subject" : [
+"english"
+]
+}
+{
+"_id" : ObjectId("67f360d2fc4431cdcca03693"),
+"name" : "Thanos",
+"age" : 4,
+"id" : 7,
+"sec" : "A",
+"subject" : [
+"maths",
+"physics",
+"chemistry"
+]
+}
+Type "it" for more
+> db.students.aggregate([{$match:{sec:"B"}},{$count:"Total student in sec:B"}])
+{ "Total student in sec:B" : 3 }
+> db.students.aggregate([{$group:{_id:"$sec",total_st:{$sum:1},max_age:{$max:"$age"}}}])
+{ "_id" : "A", "total_st" : 3, "max_age" : 37 }
+{ "_id" : "B", "total_st" : 4, "max_age" : 40 }
+> db.students.aggregate([{$match:{age:{$gt:30}}}]).pretty()
+{
+"_id" : ObjectId("67f362a0a85110378f0c0066"),
+"name" : "Steve",
+"age" : 37,
+"id" : 2,
+"sec" : "A"
+}
+{
+"_id" : ObjectId("67f362b1a85110378f0c0069"),
+"name" : "Nick",
+"age" : 40,
+"id" : 5,
+"sec" : "B",
+"subject" : [
+"english"
+]
+}
+> db.students.aggregate([{'$sort':{'age':1}}])
+{ "_id" : ObjectId("6618d1bca2c2981d07b66cf8"), "name" : "Groot", "age" : 4, "id" : 6, "sec" : "A",
+"subject" : [ "english" ] }
+{ "_id" : ObjectId("6618d221a2c2981d07b66cf9"), "name" : "Thanos", "age" : 4, "id" : 7, "sec" :
+"A", "subject" : [ "maths", "physics", "chemistry" ] }
+{ "_id" : ObjectId("6618cf5da2c2981d07b66cf3"), "name" : "Tony", "age" : 17, "id" : 1, "sec" : "A",
+"subject" : [ "physics", "maths" ] }
+{ "_id" : ObjectId("67f35f8dfc4431cdcca0368f"), "name" : "Natasha", "age" : 17, "id" : 3, "sec" :
+"B", "subject" : [ "physics", "english" ] }
+{ "_id" : ObjectId("67f362aaa85110378f0c0068"), "name" : "Bruce", "age" : 21, "id" : 4, "sec" :
+"B", "subject" : [ "physics", "maths", "biology", "chemistry" ] }
+{ "_id" : ObjectId("67f362a0a85110378f0c0066"), "name" : "Steve", "age" : 37, "id" : 2, "sec" : "A"
+}
+{ "_id" : ObjectId("6618d119a2c2981d07b66cf7"), "name" : "Nick", "age" : 40, "id" : 5, "sec" : "B",
+"subject" : [ "english" ] }
+Type "it" for more
+> db.students.count()
+22
+> db.students.distinct("name")
+[
+"Tony",
+"Steve",
+"Natasha",
+"Rony",
+"Bruce",
+"Nick",
+"Groot",
+"Thanos"
+]
+> db.students.distinct("age")
+[ 17, 37, 21, 40, 4]
+
+
+
+
+
+
+
+
+
+
+24)
+
+> use Employee
+switched to db Employee
+> db.createCollection("EMPL")
+{
+"ok" : 0,
+"errmsg" : "a collection 'Employee.EMPL' already exists",
+"code" : 48,
+"codeName" : "NamespaceExists"
+}
+> db.EMPL.insertMany([
+... {"Empno":1,"Name":"John Doe","Salary":60000,"Role":"Manager"},
+... {"Empno":2,"Name":"Alice Smith","Salary":50000,"Role":"Developer"},
+... ])
+{
+"acknowledged" : true,
+"insertedIds" : [
+ObjectId("67f36734a85110378f0c006c"),
+ObjectId("67f36734a85110378f0c006d")
+]
+}
+> db.EMPL.find().pretty()
+{
+"_id" : ObjectId("66150f18b193a92ccbf3522b"),
+"Empno" : 1,
+"Name" : "John Doe",
+"Salary" : 60000,
+"Role" : "Manager"
+}
+{
+"_id" : ObjectId("66150f18b193a92ccbf3522c"),
+"Empno" : 2,
+"Name" : "Alice Smith",
+"Salary" : 55000,
+"Role" : "Developer"
+}
+{
+"_id" : ObjectId("67f36734a85110378f0c006c"),
+"Empno" : 1,
+"Name" : "John Doe",
+"Salary" : 60000,
+"Role" : "Manager"
+}
+{
+"_id" : ObjectId("67f36734a85110378f0c006d"),
+"Empno" : 2,
+"Name" : "Alice Smith",
+"Salary" : 50000,
+"Role" : "Developer"
+}
+> db.createUser({
+... user:"admin",
+... pwd:"admin123",
+... roles:["readWrite","dbAdmin"]
+... });
+Successfully added user: { "user" : "admin", "roles" : [ "readWrite", "dbAdmin" ] }
+> db.createUser({
+... user:"developer",
+... pwd:"dev123",
+... roles:["readWrite"]
+... });
+Successfully added user: { "user" : "developer", "roles" : [ "readWrite" ] }
+> show users
+{
+"_id" : "Employee.admin",
+"userId" : BinData(4,"bRZs5ELlT/Csa5oVH6Ol8w=="),
+"user" : "admin",
+"db" : "Employee",
+"roles" : [
+{
+"role" : "readWrite",
+"db" : "Employee"
+},
+{
+"role" : "dbAdmin",
+"db" : "Employee"
+}
+]
+}
+{
+"_id" : "Employee.developer",
+"userId" : BinData(4,"rmkHws7HRaqLG+O13Mg1PA=="),
+"user" : "developer",
+"db" : "Employee",
+"roles" : [
+{
+"role" : "readWrite",
+"db" : "Employee"
+}
+]
+}
